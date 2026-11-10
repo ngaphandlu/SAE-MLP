@@ -14,8 +14,8 @@ validation_file = "_validation_data_m105.csv"
 for b in range(0,3):
     dataset_name = f'UJIIndoorLoc-B'
     # Load data
-    train_file_name = "UJIndoorData\\B" + str(b) + training_file
-    test_file_name = "UJIndoorData\\B" + str(b) + validation_file
+    train_file_name = "UJIIndoorLocData\\B" + str(b) + training_file
+    test_file_name = "UJIndoorLocData\\B" + str(b) + validation_file
     train = pd.read_csv(train_file_name)
     val = pd.read_csv(test_file_name)
     wap_cols = [c for c in train.columns if c.startswith("WAP") or c.startswith("AP")]

@@ -61,8 +61,8 @@ if __name__ == '__main__':
                 training_times = []
                 for b in range(3):
                     #Bo du lieu chia theo building - UJIndoorLoc-B
-                    train_file_name = "UJIndoorData\\B"+ str(b) + training_file
-                    test_file_name = "UJIndoorData\\B"+ str(b) + validation_file
+                    train_file_name = "UJIIndoorLocData\\B"+ str(b) + training_file
+                    test_file_name = "UJIndoorLocData\\B"+ str(b) + validation_file
 
                 
                     train_x, train_y, valid_x, valid_y, test_x, test_y = data_helper.load(train_file_name, test_file_name, random_seed=i)

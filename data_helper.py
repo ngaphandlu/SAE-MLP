@@ -35,7 +35,7 @@ def add_gaussian_noise(X, mean=0.0, std=5.0, seed=42,
 
     noisy[detected] += noise[detected]
     noisy[detected] = np.clip(noisy[detected], rssi_min, rssi_max)
-    return noisy
+    return noisy.astype(int) 
 
 
 def add_simple_noise(X, std=5, seed=42, no_signal=100, rssi_min=-104, rssi_max=0):
@@ -49,7 +49,7 @@ def add_simple_noise(X, std=5, seed=42, no_signal=100, rssi_min=-104, rssi_max=0
 
     noisy[detected] += (sign * magnitude)[detected]
     noisy[detected] = np.clip(noisy[detected], rssi_min, rssi_max)
-    return noisy
+    return noisy.astype(int) 
 
 def load(file_path_train, file_path_valid, random_seed=42, sheet_name_train="", sheet_name_test=""):
     # Validate file paths
@@ -74,6 +74,11 @@ def load(file_path_train, file_path_valid, random_seed=42, sheet_name_train="", 
         valid_data_frame = pd.concat([valid_data_frame, sample_row])
 
     train_df = rest_data_frame
+    if 'TUT' in file_path_train:
+       train_df = train_df.replace(-105, 100)
+       valid_data_frame = valid_data_frame.replace(-105, 100)
+       test_data_frame = test_data_frame.replace(-105, 100)
+    
     wap_cols = [c for c in train_df.columns if c.startswith('WAP') or c.startswith("AP") or c.startswith("MAC")]
     print("number of columns: ", len(wap_cols))
     # NOW split into x and y — after deduplication
@@ -91,30 +96,6 @@ def load(file_path_train, file_path_valid, random_seed=42, sheet_name_train="", 
         valid_y = valid_data_frame[['LONGITUDE', 'LATITUDE']] if longitude_col else valid_data_frame[["x", "y"]]
 
     return train_x,train_y,valid_x,valid_y,test_x,test_y
-
-def load_train_file(file_path_train, file_path_valid, sheet_name_train="", sheet_name_test=""):
-    
-    # Read the data
-    train_data_frame = read_file(file_path_train, sheet_name_train)
-    train_data_frame = train_data_frame.fillna(100)
-    test_data_frame = read_file(file_path_valid, sheet_name_test)
-    test_data_frame = test_data_frame.fillna(100)
-
-    train_df = train_data_frame.copy()
-    #train_data = train_data_frame.sample(frac=1, random_state=42).reset_index(drop=True)
-
-    wap_cols = [c for c in train_df.columns if c.startswith('WAP') or c.startswith("AP") or c.startswith("MAC")]
-
-    # NOW split into x and y — after deduplication
-    train_x = train_df[wap_cols]
-    test_x = test_data_frame[wap_cols]
-    if "EEIL" in file_path_train:
-        train_y = train_df[['X', 'Y']]
-        test_y = test_data_frame[['X', 'Y']]
-    else: 
-        train_y = train_df[['LONGITUDE', 'LATITUDE']] if "LONGITUDE" in train_df.columns else train_df[["x", "y"]]
-        test_y = test_data_frame[['LONGITUDE', 'LATITUDE']] if "LONGITUDE" in train_df.columns else test_data_frame[["x", "y"]]
-    return train_x, train_y, test_x, test_y
 
 
 def normalizeX_zero_to_one(arr):

@@ -28,23 +28,15 @@ save_dir_10_run = os.path.join(base_dir,'results\\10_run\\')
 log_dir='New_new_log_10_2026.txt'
 
 dataset_name = 'UJIIndoorLoc'
-training_file = "UJIndoorData\\trainingData.csv"
-validation_file = "UJIndoorData\\validationData.csv"
+training_file = "UJIIndoorLocData\\trainingData.csv"
+validation_file = "UJIndoorLocData\\validationData.csv"
 
 # dataset_name = 'TUT'
 # training_file = "Data\\Training_data_TUT_Diff_Distance.csv"
 # validation_file = "Data\\Test_data_TUT_Diff_Distance.csv"
 
-# dataset_name = 'EEIL'
-# training_file = "Data\\EEIL_Training_XY_All.csv"
-# validation_file = "Data\\EEIL_Testing_XY_All.csv"
 
-if dataset_name == "UJIIndoorLoc":
-    random_seeds =  [1, 4, 12, 23, 24] # UJIIndoorLoc
-elif dataset_name == "TUT":
-    random_seeds = [6, 10, 14, 20, 24] 
-else:
-    random_seeds = range(1, 11) # EEIL
+random_seeds = range(1, 6) 
 
 kernel_sizes = [3, 5, 7]
 filters = [32, 64, 128]
@@ -96,7 +88,7 @@ for k in [1]: # kernel_sizes
         mean_errors.extend([mse, rmse, mae, predict_time, training_time, dataset_name, model_type, save_name, seed, "0", k])
 
         with open(log_dir,'a') as file:
-            file.write(f'\n--Dataset {dataset_name} noise0 run {seed}  : {mean_errors}')
+            file.write(f'\n--Dataset {dataset_name} run {seed}  : {mean_errors}')
     
 
         file_name = save_dir_10_run + 'result_10_26.csv'

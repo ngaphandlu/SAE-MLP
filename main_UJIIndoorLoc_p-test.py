@@ -26,32 +26,21 @@ save_picture_dir = os.path.join(base_dir,'Images\\08-2025')
 save_dir_10_run = os.path.join(base_dir,'results\\10_run\\')
 log_dir='New_new_log_07_2025.txt'
 
-# dataset_name = 'HCXY'
-# training_file = "Data\\Training_HCXY_All_30.xlsx"
-# validation_file = "Data\\Testing_HCXY_All.xlsx"
-
-# dataset_name = 'SYL'
-# training_file = "Data\\Training_SYL_All_30.xlsx"
-# validation_file = "Data\\Testing_SYL_All.xlsx"
 
 # dataset_name = 'UJIIndooLoc'
-# training_file = "UJIndoorData\\trainingData.csv"
-# validation_file = "UJIndoorData\\validationData.csv"
+# training_file = "UJIIndoorLocData\\trainingData.csv"
+# validation_file = "UJIIndoorLocData\\validationData.csv"
 
-# dataset_name = 'UJIIndooLocOrg-Augmented'
-# training_file = "UJIndoorData\\augmented_data_all.csv" #trainingData.csv"
-# validation_file = "UJIndoorData\\validationData.csv"
-
-dataset_name = 'Tampere'
-training_file = "Data\\Training_data_TUT_Diff_Distance.csv"
-validation_file = "Data\\Test_data_TUT_Diff_Distance.csv"
+dataset_name = 'TUT'
+training_file = "TUTData\\Training_data_TUT_Diff_Distance.csv"
+validation_file = "TUTData\\Test_data_TUT_Diff_Distance.csv"
 
 with open(log_dir,'a') as file:
-        file.write('\n=================' + dataset_name  + '-SAE(128-64)-MLP-0to1Norm=======') #0to1Norm Joint model x_minNorm Pretrained SAE-256-128-64-
+        file.write('\n=================' + dataset_name  + '-SAE(256-128-64)-MLP-0to1Norm=======') #0to1Norm Joint model x_minNorm Pretrained SAE-256-128-64-
 
 for k in [1]:
     for i in range (1, 11):
-        save_name = dataset_name  + '-SAE(128-64)-MLP-0to1Norm_run' + str(i) #SAE-128-64- JointModel
+        save_name = dataset_name  + '-SAE(256-128-64)-MLP-0to1Norm_run' + str(i) #SAE-128-64- JointModel
         mean_errors = []
    
         
@@ -83,19 +72,9 @@ for k in [1]:
         end_time =time.time()
         training_time=end_time-start_time
 
-        """ if h is not None:
-            plt.plot(h.history['loss'])
-            plt.plot(h.history['val_loss'])
-            plt.title('Train/Validation Loss')
-            plt.ylabel('Loss')
-            plt.xlabel('Epoch')
-            plt.grid(True)
-            plt.legend(['Train', 'Validation'], loc='upper right')
-            plt.savefig(save_picture_dir + '\\' + save_name + '.png', dpi=400)
-            plt.clf() """
 
         longitude_error,latitude_error,mse, rmse, mae, predict_time = model.error(test_x, test_y)
-        mean_errors.extend([mse, rmse, mae, predict_time, training_time, dataset_name, 'SAE(128-64)-MLP', save_name])
+        mean_errors.extend([mse, rmse, mae, predict_time, training_time, dataset_name, 'SAE(256-128-64)-MLP', save_name])
 
         with open(log_dir,'a') as file:
             file.write('\n--Dataset ' + dataset_name + ' run ' + str(i) + ' : ' + str(mean_errors))
