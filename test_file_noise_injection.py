@@ -5,7 +5,7 @@ import data_helper
 SEED = 42
 NUM_NOISE_SAMPLES = 5
 
-stds = [1, 2, 3, 4, 5, 10, 15, 20, 25] #
+stds = [1, 2, 3, 4, 5] #
 
 test = pd.read_csv(f"UJIIndoorLocData\\validationData.csv")
 # 'TUTData\\Test_data_TUT_Diff_Distance.csv'

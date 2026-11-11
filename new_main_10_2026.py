@@ -61,7 +61,7 @@ for run in range(3):
     model._preprocess(train_x, train_y, valid_x, valid_y)
 
 
-    stds = [1, 2, 3, 4, 5, 10, 15, 20, 25]
+    stds = [1, 2, 3, 4, 5]
     NUM_NOISE_SAMPLES = 5
   
 

@@ -38,7 +38,7 @@ save_dir_10_run = os.path.join(base_dir,'results\\10_run\\')
 labels = ['105']
 
 dataset_name = 'UJIIndoorLoc-B'
-random_seeds = [1, 3, 15, 16, 19]
+
 
 if __name__ == '__main__':
     b = 2.8
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     epoch_sae = 60
     epoch_position = 100
     dp = 0.7
-    for i in random_seeds:
+    for i in range(1, 6):
         for m in labels:
             # UJIIndoorLoc-B
             training_file = "_training_data_m" + m + ".csv"

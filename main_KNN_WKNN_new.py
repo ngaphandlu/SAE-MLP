@@ -35,7 +35,7 @@ if dataset_name == "TUT":
         Xtr = np.where(Xtr == -105, 100, Xtr)
         Xte = np.where(Xte == -105, 100, Xte)
 
-stds = [1, 2, 3, 4, 5, 10, 15, 20, 25]#[1,2,3,4,5]
+stds = [1, 2, 3, 4, 5]#
 for std in stds:
     for i in range(5):
         # Load the noisy test data

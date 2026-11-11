@@ -52,8 +52,8 @@ with open(log_dir,'a') as file:
         file.write('\n=================' + dataset_name  + f'{model_type}-0to1Norm 10 times 1 noisy test=======') #0to1Norm Joint model x_minNorm Pretrained SAE-256-128-64-
 
 for k in [1]: # kernel_sizes
-    for seed in range(1,11): # random_seeds
-        save_name = dataset_name  + f'{model_type}-0to1Norm t_run{seed}_noise0' #SAE-256-128-64- JointModel
+    for seed in range(1,6): # random_seeds
+        save_name = dataset_name  + f'{model_type}-0to1Norm t_run{seed}' #SAE-256-128-64- JointModel
         mean_errors = []
 
         train_x, train_y, valid_x, valid_y, test_x, test_y = data_helper.load(training_file, validation_file, random_seed=seed)

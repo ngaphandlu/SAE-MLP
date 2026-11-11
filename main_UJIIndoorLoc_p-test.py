@@ -39,7 +39,7 @@ with open(log_dir,'a') as file:
         file.write('\n=================' + dataset_name  + '-SAE(256-128-64)-MLP-0to1Norm=======') #0to1Norm Joint model x_minNorm Pretrained SAE-256-128-64-
 
 for k in [1]:
-    for i in range (1, 11):
+    for i in range (1, 6):
         save_name = dataset_name  + '-SAE(256-128-64)-MLP-0to1Norm_run' + str(i) #SAE-128-64- JointModel
         mean_errors = []
    
